@@ -1,41 +1,28 @@
 import React, { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+App.defaultProps = {
+  name: '',
+  price: 1000
+}
 
-  const increment = () => {
-    setCount(prevCount => prevCount + 1)
-  }
-  const increment2 = () => {
-    for (let i = 0; i < 100; i++) {
-      setCount(prevCount => prevCount + 1)
-    }
-  }
-  const decrement = () => {
-    setCount(prevCount => prevCount - 1)
-  }
+function App(props) {
+  const [name, setName] = useState(props.name)
+  const [price, setPrice] = useState(props.price)
 
-  const double = () => {
-    setCount(prevCount => prevCount * 2)
+  const reset = () => {
+    setPrice(props.price)
+    setName(props.name)
   }
-
-  const three = () => setCount(prevCount => (
-    prevCount % 3 === 0 ? prevCount / 3 : prevCount
-  ))
-
+  
   return (
-    <React.Fragment>
-      <p>count: {count}</p>
-      <button onClick={increment}>+</button>
-      <button onClick={() => setCount(prevCount => prevCount + 10)}>++</button>
-      <button onClick={increment2}>+++</button>
-      <button onClick={decrement}>-</button>
-      <button onClick={() => setCount(prevCount => prevCount - 10)}>--</button>
-
-      <button onClick={double}>*</button>
-      <button onClick={three}>-3-</button>
-    </React.Fragment>
-  );
+    <div>
+      <p>{name} : {price}</p>
+      <button onClick={() => setPrice(prevPrice => prevPrice + 1)}>+</button>
+      <button onClick={() => setPrice(prevPrice => prevPrice - 1)}>-</button>
+      <button onClick={reset}>reset</button>
+      <input value={name} type="text" onChange={e => setName(e.target.value)} />
+    </div>
+  )
 }
 
 export default App;
