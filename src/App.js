@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-App.defaultProps = {
-  name: '',
-  price: 1000
-}
+
 
 function App(props) {
   const [state, setState] = useState(props)
   const {name, price} = state
+
+  useEffect(() => {
+    console.log('open')
+  })
   
   return (
     <div>
@@ -18,6 +19,11 @@ function App(props) {
       <input value={name} type="text" onChange={e => setState({...state, name: e.target.value})} />
     </div>
   )
+}
+
+App.defaultProps = {
+  name: '',
+  price: 1000
 }
 
 export default App;
