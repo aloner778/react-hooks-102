@@ -29,7 +29,7 @@ function EventForm() {
   }
 
   const unCreatable = title === '' || body === ''
-  const unDeleteAll = state.length === 0
+  const unDeleteAll = state.events.length === 0
 
   return (
     <React.Fragment>
