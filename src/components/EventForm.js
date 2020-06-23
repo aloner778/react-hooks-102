@@ -46,10 +46,17 @@ function EventForm() {
       })
     } 
   }
+  
+  const deleteAllOperationLogs = e => {
+    e.preventDefault()
+    const result = window.confirm('全ての操作ログを本当に削除しても良いですか？')
+    if (result) dispatch({ type: DELETE_ALL_OPERATION_LOGS })
+  }
 
   const unCreatable = title === '' || body === ''
-  const unDeleteAll = state.events.length === 0
-
+  const unDeleteAllEvents = state.events.length === 0
+  const unDeleteAllOperations = state.operationLogs.length === 0
+  
   return (
     <React.Fragment>
       <h4>イベント作成フォーム</h4>
@@ -65,11 +72,11 @@ function EventForm() {
         </div>
 
         <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>イベントを作成する</button>
-        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={unDeleteAll}>全てのイベントを削除する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={unDeleteAllEvents}>全てのイベントを削除する</button>
+        <button className="btn btn-danger" onClick={deleteAllOperationLogs} disabled={unDeleteAllOperations} >全ての操作ログを削除する</button>
       </form>
     </React.Fragment>
   )
-
 }
 
 export default EventForm
